@@ -42,4 +42,11 @@ Struktura umożliwia przechowywanie oraz zarządzanie powiadomieniami, które mo
 Tabela ArchivedTasks - Przechowuje zadania, które zostały zakończone i zarchiwizowane 
 Tabela stworzona w celu przenoszenia starszych zadań (6 miesięcy) co poprawi wydajność bazy danych, poprzez zmniejszenie glównej tabeli z zadaniami.
 
+### Procedury 
+
+### Indeksy 
+
+### Widoki
+
+### Pomysły na przyszłość 
 
