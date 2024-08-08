@@ -1,0 +1,4 @@
+Procedura AddTask - dodaje nowe zadanie do systemu, w celu uproszczenia procesu tworzenia zadań, zapewni spójność danych i minimalizacje błędu
+Procedura ArchiveOldTasks - Przenosi ukończone zadania starsze niż 6 miesięcy do tabeli ArchivedTasks, automatyzacja procesu archiwizacji zadań, poprawi wydajność bazy danych
+Procedura DeleteTask - Zapewni spójne usunięcie wszystkich danych związanych z zadaniem
+Procedura UpdateTask - Aktualizuje szczegóły zadania oraz opisze hisstorei zmian 
