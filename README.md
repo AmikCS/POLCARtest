@@ -43,10 +43,19 @@ Tabela ArchivedTasks - Przechowuje zadania, które zostały zakończone i zarchi
 Tabela stworzona w celu przenoszenia starszych zadań (6 miesięcy) co poprawi wydajność bazy danych, poprzez zmniejszenie glównej tabeli z zadaniami.
 
 ### Procedury 
-
+Procedura AddTask - dodaje nowe zadanie do systemu, w celu uproszczenia procesu tworzenia zadań, zapewni spójność danych i minimalizacje błędu
+Procedura ArchiveOldTasks - Przenosi ukończone zadania starsze niż 6 miesięcy do tabeli ArchivedTasks, automatyzacja procesu archiwizacji zadań, poprawi wydajność bazy danych
+Procedura DeleteTask - Zapewni spójne usunięcie wszystkich danych związanych z zadaniem
+Procedura UpdateTask - Aktualizuje szczegóły zadania oraz opisze historie zmian
+Procedura GetStats - Generuje statystki dotyczące zadań dla użytkowników, powstała dla wygodne uzyskania ifnormacji o liczbie zadań przypisanych. 
+Procedura GenerateTaskNotifications - Generuje powiadomienia dla użytkowników o zadanich, które mają blisko termin zakończenia 
 ### Indeksy 
-
+Indeks IDX_Tenants_TenantID - Poprawia wydajność zapytań, które filtrują dane na podstawie TenantID
+Indeks IDX_Users_UserID_TenantID - Indeks na kolumnie UserID oraz TenantID w Users, przyspiesza zapytania, które łącza użytkowników z zadaniami
+Indeks IDX_Tasks_TaskID_TenantID - 
 ### Widoki
-
+Widok UserTaskCounts - Przechowuje informacje o liczbie zadań przypisanych do każdego użytkownika - uproszczenie w raportowaniu i szybki dostep do statystyk 
+Widok ArchivedTasks - Przechowuje informacje o zadaniach, które są zarchiwizowane, oddzielenie zakończonych zadań od bieżących, łatwiejsze raportowanie i przegląd danych archiwalnych
+Widok UserTaskStats - 
 ### Pomysły na przyszłość 
 
