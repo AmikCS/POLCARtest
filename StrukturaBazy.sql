@@ -1,0 +1,62 @@
+CREATE TABLE Tenants (
+    TenantID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(50) NOT NULL);
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY(1,1),
+    TenantID INT FOREIGN KEY REFERENCES Tenants(TenantID),
+    Username VARCHAR(50) NOT NULL,
+    Manager INT NOT NULL CHECK (Manager IN (1, 2)),
+	Role VARCHAR(50) NOT NULL DEFAULT 'Pracownik',
+    CONSTRAINT FK_Users_Tenants FOREIGN KEY (TenantID) REFERENCES Tenants(TenantID));
+
+CREATE TABLE Tasks (
+    TaskID INT PRIMARY KEY IDENTITY(1,1),
+    TenantID INT FOREIGN KEY REFERENCES Tenants(TenantID),
+    CreatedByUserID INT FOREIGN KEY REFERENCES Users(UserID),
+    Title VARCHAR(50) NOT NULL,
+	Descriptions VARCHAR(255),
+	Status VARCHAR(50) NOT NULL,
+    Priority VARCHAR(50) NOT NULL,
+    CreatedDate DATETIME NOT NULL DEFAULT GETDATE(),
+    CONSTRAINT FK_Tasks_Users FOREIGN KEY (CreatedByUserID) REFERENCES Users(UserID),
+    CONSTRAINT FK_Tasks_Tenants FOREIGN KEY (TenantID) REFERENCES Tenants(TenantID));
+
+CREATE TABLE TaskHistory (
+    HistoryID INT PRIMARY KEY IDENTITY(1,1),
+    TaskID INT FOREIGN KEY REFERENCES Tasks(TaskID),
+    ChangedByUserID INT FOREIGN KEY REFERENCES Users(UserID),
+    ChangedDate DATETIME NOT NULL DEFAULT GETDATE(),
+    Title VARCHAR(50) NULL,
+    Priority VARCHAR(50) NULL,
+    Descriptions VARCHAR(255) NULL,
+    Status VARCHAR(50) NULL,
+    CONSTRAINT FK_TaskHistory_Tasks FOREIGN KEY (TaskID) REFERENCES Tasks(TaskID));
+
+CREATE TABLE TaskStats (
+    StatID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    TenantID INT FOREIGN KEY REFERENCES Tenants(TenantID),
+    CompletedTasks INT DEFAULT 0,
+    InProgressTasks INT DEFAULT 0,
+    NotStartedTasks INT DEFAULT 0);
+
+CREATE TABLE Notifications (
+    NotificationID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    Message VARCHAR(255),
+    IsRead TINYINT DEFAULT 1,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    CONSTRAINT CHK_IsRead CHECK (IsRead IN (1, 2)));
+
+CREATE TABLE ArchivedTasks (
+    TaskID INT PRIMARY KEY,
+    TenantID INT FOREIGN KEY REFERENCES Tenants(TenantID),
+    CreatedByUserID INT FOREIGN KEY REFERENCES Users(UserID),
+    Title VARCHAR(200),
+    Priority VARCHAR(50),
+    Description VARCHAR(255),
+    Status VARCHAR(50),
+    CreatedDate DATETIME,
+    ArchivedDate DATETIME DEFAULT GETDATE());
+
