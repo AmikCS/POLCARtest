@@ -52,10 +52,26 @@ Procedura GenerateTaskNotifications - Generuje powiadomienia dla użytkowników 
 ### Indeksy 
 Indeks IDX_Tenants_TenantID - Poprawia wydajność zapytań, które filtrują dane na podstawie TenantID
 Indeks IDX_Users_UserID_TenantID - Indeks na kolumnie UserID oraz TenantID w Users, przyspiesza zapytania, które łącza użytkowników z zadaniami
-Indeks IDX_Tasks_TaskID_TenantID - 
+Indeks IDX_Tasks_TaskID_TenantID - Indeks na kolumnie TaskID i TenantID w Task, szybki dostęp do zadań dla konkrentego podmiotu
+Indeks IDX_Tasks_CreatedByUserID - Indeks na kolumnie CreatedByUserI w Tasks - przyspiesza zapytania, które filtruja zadania na podstawie użytkownika
+Indeks IDX_TaskHistory_TaskID - Indeks na kolumnie TaskID w tabeli TaskHistory - szybki dostęp do zmian dla konkretnych zadań 
 ### Widoki
 Widok UserTaskCounts - Przechowuje informacje o liczbie zadań przypisanych do każdego użytkownika - uproszczenie w raportowaniu i szybki dostep do statystyk 
 Widok ArchivedTasks - Przechowuje informacje o zadaniach, które są zarchiwizowane, oddzielenie zakończonych zadań od bieżących, łatwiejsze raportowanie i przegląd danych archiwalnych
 Widok UserTaskStats - 
+
 ### Pomysły na przyszłość 
+### Pomysły zabezpieczeń:
+Dodanie zabezpieczenia w postaci osobnych uprawnień dla użytkowników - roli. Wdrozenie systemu RBAC
+Wszystkie zmiany w kluczowych tabelach zarejestrowane w systemie (CRUD)
+
+### Pomysły rozwojowe:
+Utworzenie więcej widoków agregujących
+Stworzenie etykiet do zadań i przez to stworzenie kategorii - Łatwiejsze grupowanie zadania według tematyki, projektów itp
+Dodanie komentarzy przy zadanich - zwiększy współprace zespołową, bieżące aktualizowanie informacji
+Załączniki do zadań - możliwość dodania załącnzików do zadań. Lepsze zarządzanie dokumentacją
+Przypomnienia wysyłane na maila - wykorzystanie notifications, gdzie będzie powiadomienie przychodzić na maila z terminem. 
+Integracja z kalendarzem - automatycznie pozowli dodać termin zadania do kalendarza użytkownika 
+Dashboard - interaktywny dashboard, który wyświetli najważniejsze statystyki
+
 
